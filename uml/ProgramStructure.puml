@@ -1,0 +1,12 @@
+@startuml
+Class App
+Class File
+Class Functions
+Class InventoryItem
+Class InventorySystemController
+
+InventorySystemController -- Functions
+Functions -- File
+App -- InventorySystemController
+InventoryItem -- Functions
+@enduml
