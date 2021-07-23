@@ -17,16 +17,16 @@
     <ScrollPane layoutX="14.0" layoutY="79.0" prefHeight="644.0" prefWidth="1252.0">
         <TableView fx:id="tableView" prefHeight="643.0" prefWidth="1253.0">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="284.0" text="Name" />
-                <TableColumn fx:id="serialNumColumn" prefWidth="359.0" text="Serial Number" />
-                <TableColumn fx:id="valueColumn" prefWidth="460.0" text="Value" />
+                <TableColumn fx:id="nameColumn" prefWidth="345.0" text="Name" />
+                <TableColumn fx:id="serialNumColumn" prefWidth="539.0" text="Serial Number" />
+                <TableColumn fx:id="valueColumn" prefWidth="369.0" text="Value" />
             </columns>
         </TableView>
     </ScrollPane>
     <ButtonBar layoutX="540.0" layoutY="736.0" prefHeight="40.0" prefWidth="200.0">
       <buttons>
           <Button mnemonicParsing="false" onAction="#NewButtonClicked" text="New " />
-          <Button mnemonicParsing="false" text="Remove" />
+          <Button mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
       </buttons>
     </ButtonBar>
     <ButtonBar layoutX="1092.0" layoutY="7.0" prefHeight="40.0" prefWidth="147.0">

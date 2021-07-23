@@ -2,6 +2,7 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -10,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 public class InventorySystemController{
+
+    public static ObservableList<InventoryItem> list = FXCollections.observableArrayList();
     // Table Initializers
     @FXML
     private TableView<InventoryItem> tableView;
@@ -32,7 +35,6 @@ public class InventorySystemController{
         serialNumColumn.setCellValueFactory(new PropertyValueFactory<>("serialNum"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-        ObservableList<InventoryItem> list = FXCollections.observableArrayList();
         tableView.setItems(list);
 
         //allow fields to be edited
@@ -42,13 +44,27 @@ public class InventorySystemController{
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        list.add(new InventoryItem("12345", "test", "2.00"));
         tableView.refresh();
 
     }
 
+    public void changeSerialNumEvent(TableColumn.CellEditEvent cell) {
+        InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
+        itemSelected.setSerialNum(cell.getNewValue().toString());
+    }
+    public void changeValueEvent(TableColumn.CellEditEvent cell) {
+        InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
+        itemSelected.setValue(cell.getNewValue().toString());
+    }
     // Buttons
     public void NewButtonClicked() {
-        Functions.newItem();
+        Functions.openNewItem();
+    }
+
+    public void removeButtonClicked() {
+        if(tableView.getSelectionModel().getSelectedItems().size() == 0) {
+            return;
+        }
+        Functions.removeItem(tableView.getSelectionModel().getSelectedItems(), list);
     }
 }
