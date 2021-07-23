@@ -2,17 +2,18 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+@SuppressWarnings("rawtypes")
 public class InventorySystemController{
 
-    public static ObservableList<InventoryItem> list = FXCollections.observableArrayList();
+    private static ObservableList<InventoryItem> list = FXCollections.observableArrayList();
     // Table Initializers
     @FXML
     private TableView<InventoryItem> tableView;
@@ -22,6 +23,10 @@ public class InventorySystemController{
     private TableColumn<InventoryItem, String> serialNumColumn;
     @FXML
     private TableColumn<InventoryItem, String> valueColumn;
+    @FXML
+    private Label errorReporter;
+    @FXML
+    private TextField searchBar;
 
 
     public void initialize() {
@@ -43,28 +48,66 @@ public class InventorySystemController{
         serialNumColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.refresh();
 
     }
-
+    @FXML
     public void changeSerialNumEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
-        itemSelected.setSerialNum(cell.getNewValue().toString());
+        // Add check on all change item events
+        if(VerifyEntry.verifySerialNumber(list , cell.getNewValue().toString(), errorReporter) == 0) {
+            itemSelected.setSerialNum(cell.getNewValue().toString());
+            errorReporter.setText("");
+        }
+        tableView.refresh();
     }
+    @FXML
     public void changeValueEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
-        itemSelected.setValue(cell.getNewValue().toString());
+        if(VerifyEntry.verifyValue(cell.getNewValue().toString(), errorReporter) == 0) {
+            errorReporter.setText("");
+            itemSelected.setValue(cell.getNewValue().toString());
+        }
+        tableView.refresh();
+    }
+    @FXML
+    public void changeNameEvent(TableColumn.CellEditEvent cell) {
+        InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
+        if(VerifyEntry.verifyName(cell.getNewValue().toString(), errorReporter) == 0) {
+            errorReporter.setText("");
+            itemSelected.setValue(cell.getNewValue().toString());
+        }
+        tableView.refresh();
     }
     // Buttons
+    @FXML
     public void NewButtonClicked() {
         Functions.openNewItem();
     }
-
+    @FXML
     public void removeButtonClicked() {
         if(tableView.getSelectionModel().getSelectedItems().size() == 0) {
+            errorReporter.setText("Please select an Item to Delete");
             return;
         }
+        errorReporter.setText("");
         Functions.removeItem(tableView.getSelectionModel().getSelectedItems(), list);
+    }
+
+    public void searchButtonPressed() {
+        String key = searchBar.getText();
+        ObservableList<InventoryItem> results;
+        results = Functions.search(key, list);
+        if(results.size() == 0) {
+            Functions.displayList(list, tableView);
+            errorReporter.setText("No Results Found");
+        }
+        else {
+            Functions.displayList(results, tableView);
+        }
+
+    }
+    public static ObservableList<InventoryItem> getList() {
+        return list;
     }
 }

@@ -1,13 +1,19 @@
 package ucf.assignments;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 public class Functions {
+    public static void displayList(ObservableList<InventoryItem> list, TableView<InventoryItem> tableView) {
+        tableView.setItems(list);
+    }
+
     public static void openNewItem() {
         App.addItemPopUp();
     }
     public static ObservableList<InventoryItem> addItem(String name, String serial, String value, ObservableList<InventoryItem> list) {
-        InventorySystemController.list.add(new InventoryItem(serial, name, value));
+        list.add(new InventoryItem(serial, name, value));
 
         return list;
     }
@@ -17,5 +23,19 @@ public class Functions {
         }
 
             return list;
+    }
+
+    public static ObservableList<InventoryItem> search(String key, ObservableList<InventoryItem> list) {
+        ObservableList<InventoryItem> results = FXCollections.observableArrayList();
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getName().toLowerCase().compareTo(key) == 0) {
+                results.add(list.get(i));
+            }
+            else if(list.get(i).getSerialNum().toLowerCase().compareTo(key) == 0) {
+                results.add(list.get(i));
+            }
+        }
+        return results;
     }
 }

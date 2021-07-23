@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventorySystemController">
-    <TextField alignment="TOP_CENTER" layoutX="58.0" layoutY="14.0" prefHeight="25.0" prefWidth="412.0" promptText="Enter Serial Number or Name" />
+    <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="58.0" layoutY="14.0" prefHeight="25.0" prefWidth="412.0" promptText="Enter Serial Number or Name" />
     <Label layoutX="20.0" layoutY="18.0" text="Search:" />
     <ScrollPane layoutX="14.0" layoutY="79.0" prefHeight="644.0" prefWidth="1252.0">
         <TableView fx:id="tableView" prefHeight="643.0" prefWidth="1253.0">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="345.0" text="Name" />
-                <TableColumn fx:id="serialNumColumn" prefWidth="539.0" text="Serial Number" />
-                <TableColumn fx:id="valueColumn" prefWidth="369.0" text="Value" />
+                <TableColumn fx:id="nameColumn" onEditCommit="#changeNameEvent" prefWidth="345.0" text="Name" />
+                <TableColumn fx:id="serialNumColumn" onEditCommit="#changeSerialNumEvent" prefWidth="539.0" text="Serial Number" />
+                <TableColumn fx:id="valueColumn" onEditCommit="#changeValueEvent" prefWidth="369.0" text="Value" />
             </columns>
         </TableView>
     </ScrollPane>
@@ -45,4 +45,6 @@
           </MenuButton>
         </buttons>
     </ButtonBar>
+   <Label fx:id="errorReporter" layoutX="14.0" layoutY="62.0" prefHeight="18.0" prefWidth="1252.0" textFill="#c91515" />
+   <Button layoutX="470.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
 </AnchorPane>
