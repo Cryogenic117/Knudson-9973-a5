@@ -1,8 +1,11 @@
-package ucf.assignments;
+package ucf.assignments.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import ucf.assignments.App;
+import ucf.assignments.Functions;
+import ucf.assignments.VerifyEntry;
 
 public class AddItemPopUpController {
     @FXML

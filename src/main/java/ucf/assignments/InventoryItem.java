@@ -3,7 +3,7 @@ package ucf.assignments;
 import javafx.beans.property.SimpleStringProperty;
 
 public class InventoryItem {
-    SimpleStringProperty serialNum, name, value;
+    private SimpleStringProperty serialNum, name, value;
 
     public String getSerialNum() {
         return serialNum.get();

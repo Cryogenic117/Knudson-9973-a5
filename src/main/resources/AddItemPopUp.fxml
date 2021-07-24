@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.AddItemPopUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.controllers.AddItemPopUpController">
    <HBox alignment="CENTER" layoutX="60.0" layoutY="176.0" prefHeight="64.0" prefWidth="200.0" spacing="29.0">
       <Button mnemonicParsing="false" onAction="#okButtonClicked" prefWidth="100.0" text="OK" />
       <Button lineSpacing="1.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefWidth="100.0" text="Cancel" />

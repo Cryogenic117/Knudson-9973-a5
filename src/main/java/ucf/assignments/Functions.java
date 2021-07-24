@@ -9,9 +9,6 @@ public class Functions {
         tableView.setItems(list);
     }
 
-    public static void openNewItem() {
-        App.addItemPopUp();
-    }
     public static ObservableList<InventoryItem> addItem(String name, String serial, String value, ObservableList<InventoryItem> list) {
         list.add(new InventoryItem(serial, name, value));
 
@@ -28,12 +25,11 @@ public class Functions {
     public static ObservableList<InventoryItem> search(String key, ObservableList<InventoryItem> list) {
         ObservableList<InventoryItem> results = FXCollections.observableArrayList();
 
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getName().toLowerCase().compareTo(key) == 0) {
-                results.add(list.get(i));
-            }
-            else if(list.get(i).getSerialNum().toLowerCase().compareTo(key) == 0) {
-                results.add(list.get(i));
+        for (InventoryItem inventoryItem : list) {
+            if (inventoryItem.getName().toLowerCase().compareTo(key) == 0) {
+                results.add(inventoryItem);
+            } else if (inventoryItem.getSerialNum().toLowerCase().compareTo(key) == 0) {
+                results.add(inventoryItem);
             }
         }
         return results;

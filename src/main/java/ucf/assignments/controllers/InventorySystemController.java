@@ -1,14 +1,15 @@
-package ucf.assignments;
+package ucf.assignments.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import ucf.assignments.App;
+import ucf.assignments.Functions;
+import ucf.assignments.InventoryItem;
+import ucf.assignments.VerifyEntry;
 
 @SuppressWarnings("rawtypes")
 public class InventorySystemController{
@@ -47,7 +48,6 @@ public class InventorySystemController{
         valueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         serialNumColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
         tableView.refresh();
 
     }
@@ -81,8 +81,16 @@ public class InventorySystemController{
     }
     // Buttons
     @FXML
+    public void saveButtonClicked() {
+
+    }
+    @FXML
+    public void openButtonClicked() {
+
+    }
+    @FXML
     public void NewButtonClicked() {
-        Functions.openNewItem();
+        App.addItemPopUp();
     }
     @FXML
     public void removeButtonClicked() {
@@ -94,8 +102,8 @@ public class InventorySystemController{
         Functions.removeItem(tableView.getSelectionModel().getSelectedItems(), list);
     }
 
-    public void searchButtonPressed() {
-        String key = searchBar.getText();
+    public void searchButtonClicked() {
+        String key = searchBar.getText().toLowerCase();
         ObservableList<InventoryItem> results;
         results = Functions.search(key, list);
         if(results.size() == 0) {

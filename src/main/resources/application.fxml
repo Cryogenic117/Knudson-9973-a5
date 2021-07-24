@@ -3,15 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventorySystemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.controllers.InventorySystemController">
     <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="58.0" layoutY="14.0" prefHeight="25.0" prefWidth="412.0" promptText="Enter Serial Number or Name" />
     <Label layoutX="20.0" layoutY="18.0" text="Search:" />
     <ScrollPane layoutX="14.0" layoutY="79.0" prefHeight="644.0" prefWidth="1252.0">
@@ -30,21 +28,11 @@
       </buttons>
     </ButtonBar>
     <ButtonBar layoutX="1092.0" layoutY="7.0" prefHeight="40.0" prefWidth="147.0">
-        <buttons>
-          <MenuButton mnemonicParsing="false" prefWidth="80.0" text="Save">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-          </MenuButton>
-          <MenuButton mnemonicParsing="false" prefWidth="80.0" text="Open">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-          </MenuButton>
-        </buttons>
+      <buttons>
+         <Button mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
+         <Button mnemonicParsing="false" onAction="#openButtonClicked" text="Open" />
+      </buttons>
     </ButtonBar>
    <Label fx:id="errorReporter" layoutX="14.0" layoutY="62.0" prefHeight="18.0" prefWidth="1252.0" textFill="#c91515" />
-   <Button layoutX="470.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
+   <Button layoutX="470.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchButtonClicked" text="Search" />
 </AnchorPane>
