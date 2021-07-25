@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Brandon Knudson
+ */
 package ucf.assignments;
 
 import javafx.collections.ObservableList;
@@ -11,7 +15,11 @@ import java.io.IOException;
 
 public class ExportFileFunctions {
     public static void inputHandler(Label errorReporter, TextField filePathField, TextField name, ChoiceBox choiceBox) {
-        if (filePathField.getCharacters().toString().isEmpty()) {
+        if(InventorySystemController.getList().isEmpty()) {
+            errorReporter.setText("Please Populate Table Before Saving");
+            return;
+        }
+        else if (filePathField.getCharacters().toString().isEmpty()) {
             errorReporter.setText("Please Include a File path");
             return;
         } else if (name.getCharacters().toString().isEmpty()) {

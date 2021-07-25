@@ -1,12 +1,86 @@
 @startuml
-Class App
-Class File
-Class Functions
-Class InventoryItem
-Class InventorySystemController
 
-InventorySystemController -- Functions
-Functions -- File
-App -- InventorySystemController
-InventoryItem -- Functions
+Class App {
+    main()
+    OpenFilePopUp()
+    SavePopUp()
+    closePopUp
+}
+
+Class ListFunctions {
+    displayList()
+    addItem()
+    removeItem()
+    search()
+}
+Class InventoryItem {
+    SimpleStringProperty Serial, name, value;
+}
+Class InventorySystemController {
+    initialize()
+    ChangeSerialNumEvent()
+    changeValueEvent()
+    changeNameEvent()
+    saveButtonClicked()
+    openButtonClicked()
+    NewButtonClicked()
+    removeButtonClicked(
+    searchButtonClicked
+    getList()
+}
+Class AddItemPopUpController {
+    okButtonClicked()
+    cancelButtonClicked()
+}
+Class ImportPopUpController {
+    initialize()
+    okayButtonClicked()
+    cancelButtonClicked()
+}
+Class ExportPopUpController {
+    initialize()
+    okayButtonClicked()
+    cancelButtonClicked()
+}
+Class ImportFileFunctions {
+    inputHandler()
+    importAsJSON()
+    importHtml()
+    ImportTSV()
+}
+Class ExportFileFunctions {
+    inputHandler()
+    exportAsJSON()
+    exportAsHtml()
+    exportAsTSV()
+
+}
+Class VerifyItemEntry {
+     verifySerialNumber()
+     verifyValue()
+     verifyName()
+     validateEntries()
+}
+
+
+InventorySystemController -- ListFunctions
+ListFunctions -- VerifyItemEntry
+
+
+App -- javafx.application
+
+javafx.application --> javafx.AddItemPopUp
+javafx.application --> javafx.ExportPopUp
+javafx.application --> javafx.ImportPopUp
+
+javafx.application -- InventorySystemController
+InventorySystemController -- InventoryItem
+javafx.AddItemPopUp -- AddItemPopUpController
+javafx.ExportPopUp -- ExportPopUpController
+javafx.ImportPopUp -- ImportPopUpController
+
+ExportPopUpController -- ExportFileFunctions
+ImportPopUpController -- ImportFileFunctions
+
+
 @enduml

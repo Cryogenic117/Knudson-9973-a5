@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Brandon Knudson
+ */
 package ucf.assignments.controllers;
 
 import javafx.collections.FXCollections;
@@ -31,11 +35,6 @@ public class InventorySystemController{
 
 
     public void initialize() {
-        initializeTable();
-    }
-
-    @FXML
-    private void initializeTable() {
         // sets up table columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         serialNumColumn.setCellValueFactory(new PropertyValueFactory<>("serialNum"));
@@ -50,6 +49,7 @@ public class InventorySystemController{
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tableView.refresh();
     }
+
     @FXML
     public void changeSerialNumEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
