@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import ucf.assignments.App;
-import ucf.assignments.ExportFileFunctions;
+import ucf.assignments.ImportFileFunctions;
 
 public class ImportPopUpController {
     @FXML
@@ -25,6 +25,7 @@ public class ImportPopUpController {
     }
 
     public void okayButtonClicked() {
+        ImportFileFunctions.inputHandler(errorReporter, filePathField, choiceBox);
     }
 
     public void cancelButtonClicked() {

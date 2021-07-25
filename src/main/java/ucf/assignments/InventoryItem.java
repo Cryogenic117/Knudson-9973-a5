@@ -3,14 +3,12 @@ package ucf.assignments;
 import javafx.beans.property.SimpleStringProperty;
 
 public class InventoryItem {
-    private SimpleStringProperty serialNum, name, value;
+    private final SimpleStringProperty serialNum;
+    private final SimpleStringProperty name;
+    private final SimpleStringProperty value;
 
     public String getSerialNum() {
         return serialNum.get();
-    }
-
-    public SimpleStringProperty serialNumProperty() {
-        return serialNum;
     }
 
     public void setSerialNum(String serialNum) {
@@ -21,20 +19,8 @@ public class InventoryItem {
         return name.get();
     }
 
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
     public String getValue() {
         return value.get();
-    }
-
-    public SimpleStringProperty valueProperty() {
-        return value;
     }
 
     public void setValue(String value) {
@@ -45,5 +31,15 @@ public class InventoryItem {
         this.serialNum = new SimpleStringProperty(serialNum);
         this.name = new SimpleStringProperty(name);
         this.value = new SimpleStringProperty(value);
+    }
+    public String getTSVFormat() {
+        return getName() +"\t" + getSerialNum() + "\t" + getValue() + "\n";
+    }
+
+    public String getHTMLFormat() {
+        return "\t<tr>\n" + "\t\t<td>" + getName() + "</td>\n" + "\t\t<td>" + getSerialNum() + "</td>\n" + "\t\t<td>" + getValue() + "</td>\n" + "\t</tr>\n";
+    }
+    public String getJSONFormat() {
+        return "{ \"name\" : \"" + getName() + "\", \"serial\": \"" + getSerialNum() + "\", \"value\" :" + "\""+getValue() + "\"" + "}";
     }
 }
