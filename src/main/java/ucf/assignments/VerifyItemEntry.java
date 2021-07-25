@@ -3,7 +3,7 @@ package ucf.assignments;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
-public class VerifyEntry {
+public class VerifyItemEntry {
     public static int verifySerialNumber(ObservableList<InventoryItem> list, String serial, Label errorReporter) {
         // Returns 1 if number isn't 10 character
         if (serial.length() != 10) {
@@ -53,17 +53,17 @@ public class VerifyEntry {
 
     public static boolean validateEntries(Label errorReporter, String name, String value, String serial, ObservableList<InventoryItem> list) {
         //Verify Name
-        int result = VerifyEntry.verifyName(name, errorReporter);
+        int result = VerifyItemEntry.verifyName(name, errorReporter);
         if (result != 0) {
             return false;
         }
         // Verify Value
-        result = VerifyEntry.verifyValue(value, errorReporter);
+        result = VerifyItemEntry.verifyValue(value, errorReporter);
         if (result != 0) {
             return false;
         }
         // Verify Serial number
-        result = VerifyEntry.verifySerialNumber(list, serial, errorReporter);
+        result = VerifyItemEntry.verifySerialNumber(list, serial, errorReporter);
         return result == 0;
     }
 }

@@ -39,6 +39,42 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
+    public  static void openFilePopUp() {
+        try {
+            URL url = App.class.getClassLoader().getResource("ImportPopUp.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            popUpStage = new Stage();
+            popUpStage.setTitle("Import Inventory Items");
+            popUpStage.setScene(scene);
+
+            popUpStage.initOwner(mainStage);
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void savePopUp() {
+        try {
+            URL url = App.class.getClassLoader().getResource("ExportPopUp.fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            popUpStage = new Stage();
+            popUpStage.setTitle("Export Inventory Items");
+            popUpStage.setScene(scene);
+
+            popUpStage.initOwner(mainStage);
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void closePopUp() {
         popUpStage.close();

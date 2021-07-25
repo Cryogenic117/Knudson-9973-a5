@@ -7,14 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import ucf.assignments.App;
-import ucf.assignments.Functions;
+import ucf.assignments.ListFunctions;
 import ucf.assignments.InventoryItem;
-import ucf.assignments.VerifyEntry;
+import ucf.assignments.VerifyItemEntry;
 
 @SuppressWarnings("rawtypes")
 public class InventorySystemController{
 
-    private static ObservableList<InventoryItem> list = FXCollections.observableArrayList();
+    private static final ObservableList<InventoryItem> list = FXCollections.observableArrayList();
     // Table Initializers
     @FXML
     private TableView<InventoryItem> tableView;
@@ -49,13 +49,12 @@ public class InventorySystemController{
         serialNumColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tableView.refresh();
-
     }
     @FXML
     public void changeSerialNumEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
         // Add check on all change item events
-        if(VerifyEntry.verifySerialNumber(list , cell.getNewValue().toString(), errorReporter) == 0) {
+        if(VerifyItemEntry.verifySerialNumber(list , cell.getNewValue().toString(), errorReporter) == 0) {
             itemSelected.setSerialNum(cell.getNewValue().toString());
             errorReporter.setText("");
         }
@@ -64,7 +63,7 @@ public class InventorySystemController{
     @FXML
     public void changeValueEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
-        if(VerifyEntry.verifyValue(cell.getNewValue().toString(), errorReporter) == 0) {
+        if(VerifyItemEntry.verifyValue(cell.getNewValue().toString(), errorReporter) == 0) {
             errorReporter.setText("");
             itemSelected.setValue(cell.getNewValue().toString());
         }
@@ -73,7 +72,7 @@ public class InventorySystemController{
     @FXML
     public void changeNameEvent(TableColumn.CellEditEvent cell) {
         InventoryItem itemSelected = tableView.getSelectionModel().getSelectedItem();
-        if(VerifyEntry.verifyName(cell.getNewValue().toString(), errorReporter) == 0) {
+        if(VerifyItemEntry.verifyName(cell.getNewValue().toString(), errorReporter) == 0) {
             errorReporter.setText("");
             itemSelected.setValue(cell.getNewValue().toString());
         }
@@ -82,11 +81,11 @@ public class InventorySystemController{
     // Buttons
     @FXML
     public void saveButtonClicked() {
-
+        App.savePopUp();
     }
     @FXML
     public void openButtonClicked() {
-
+        App.openFilePopUp();
     }
     @FXML
     public void NewButtonClicked() {
@@ -99,19 +98,19 @@ public class InventorySystemController{
             return;
         }
         errorReporter.setText("");
-        Functions.removeItem(tableView.getSelectionModel().getSelectedItems(), list);
+        ListFunctions.removeItem(tableView.getSelectionModel().getSelectedItem(), list);
     }
 
     public void searchButtonClicked() {
         String key = searchBar.getText().toLowerCase();
         ObservableList<InventoryItem> results;
-        results = Functions.search(key, list);
+        results = ListFunctions.search(key, list);
         if(results.size() == 0) {
-            Functions.displayList(list, tableView);
+            ListFunctions.displayList(list, tableView);
             errorReporter.setText("No Results Found");
         }
         else {
-            Functions.displayList(results, tableView);
+            ListFunctions.displayList(results, tableView);
         }
 
     }
